@@ -1,0 +1,27 @@
+Generate Project
+npx expo-cli init tracks --yarn
+** Add C:\Users\{USER}\AppData\Local\Yarn\bin such as C:\Users\steph\AppData\Local\Yarn\bin to ENV
+
+yarn add react-navigation
+expo install react-native-gesture-handler react-native-reanimated react-native-screens react-native-safe-area-context @react-native-community/masked-view
+yarn add react-navigation-stack @react-native-community/masked-view
+yarn upgrade @react-native-community/masked-view@0.1.10
+yarn add react-navigation-tabs
+expo r -c
+expo start --tunnel
+
+Update package.json to start in tunnel mode directly
+    "start": "expo start --tunnel"
+
+
+When crewating project in GitHub.
++ Select Public
++ And don't select anything else
+==> Will see the instruction
+git remote add origin https://github.com/khoakim/react_native_01_food_Khoa.git
+git branch -M main
+git push -u origin main
+
+*** git remote rm origin
+
+*** Use "Ctrl+D" to do multi-select
