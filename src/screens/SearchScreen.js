@@ -1,12 +1,15 @@
 import React, {useState} from "react";
-import { View, Text, StyleSheet, TextInput, Button } from 'react-native';
+import { View, Text, StyleSheet, TextInput, Button, FlatList, Image, TouchableOpacity } from 'react-native';
 import { Feather } from '@expo/vector-icons'; 
 import yelp from '../api/yelp';
 
-const SearchScreen = () => {
-    const [search,setSearch] = useState("");
+const SearchScreen = ({navigation}) => {
+    const [search,setSearch] = useState("sushi");
+    const [results,setResults] = useState([]);
+
     return (
-        <View style={styles.container}>
+        <View>
+            <View style={styles.container}>
             <Feather name="search" style={styles.searchIcon} color="black" />
             <TextInput 
                 style={styles.searchBox} 
@@ -20,14 +23,56 @@ const SearchScreen = () => {
                         location: 'Canberra',
                         term: search
                     }
-                }).then( response => console.log(response))
+                }).then( response => {
+                    // console.log("New");
+                    // console.log(response.data.businesses);
+                    setResults(response.data.businesses);
+                })
             }}/>
+            </View >
+                    <FlatList
+                    showsHorizontalScrollIndicator={false}
+                    horizontal
+                    data={results}
+                    renderItem={({ item }) => 
+                    <TouchableOpacity onPress={()=>navigation.navigate("Details", {id: item.id})}>
+                        <View>
+                            <Text>{item.name}</Text>
+                            {item.image_url?
+                            <Image
+                            style={styles.tinyLogo}
+                            source={{
+                            uri: item.image_url,
+                            }}/>:
+                            <Image
+                            style={styles.tinyLogo}
+                            source={{
+                              uri: 'https://reactnative.dev/img/tiny_logo.png',
+                            }}
+                          />}
+                        
+                        </View>
+                        
+                    </TouchableOpacity>
+
+                      }
+                    keyExtractor={item => item.id}
+                />
+
+
         </View>
     )
 };
 
 const styles=StyleSheet.create({
     container : {
+        fontSize : 48,
+        flexDirection : 'row',
+        marginHorizontal : 10,
+        alignItems:'center'
+
+    },
+    container2 : {
         fontSize : 48,
         flexDirection : 'row',
         marginHorizontal : 10,
@@ -42,7 +87,11 @@ const styles=StyleSheet.create({
         borderColor : 'red',
         borderWidth : 2,
         flex:1
-    }
+    },
+    tinyLogo: {
+        width: 200,
+        height: 200,
+      },
 });
 
 export default SearchScreen
