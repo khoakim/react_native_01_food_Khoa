@@ -1,1 +1,5 @@
 1) Create screens and wire to App.js
+2) Create button to request result from YELP
+3) Display result out
+4) Create navigation from picture to DetailsScreen
+5) Extract hook logic out
