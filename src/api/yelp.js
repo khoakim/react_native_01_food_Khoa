@@ -11,7 +11,7 @@
 import axios from 'axios';
 // Next we make an 'instance' of it
 const instance = axios.create({
-// .. where we make our configurations
+    // .. where we make our configurations
     baseURL: 'https://api.yelp.com/v3/businesses',
     headers: {
         Authorization: 'Bearer zl98Qe4bxBGPZMcyXnYiFwmyRU_GiVlYzNKTgUMWwQuS1ZoOQTdpPjdB88jlkuTmyPZ3BHQ9grJKtKOwBS-34JXSf4rHtxSTRSfcIOvQBjFvcnr8EXXw5VFZ68xFYXYx'
